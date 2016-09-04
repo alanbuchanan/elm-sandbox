@@ -4,7 +4,6 @@ import Html exposing (..)
 import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
-import String
 
 
 main =
@@ -45,12 +44,32 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ input [ placeholder "Search for a Github user", onInput Change ] []
+    div
+        [ style
+            [ ( "display", "flex" )
+            , ( "justify-content", "center" )
+            , ( "align-items", "center" )
+            , ( "flex-direction", "column" )
+            ]
+        ]
+        [ input
+            [ placeholder "Search for a Github username"
+            , onInput Change
+            , style
+                [ ( "font-size", "30px" )
+                , ( "padding", "10px" )
+                , ( "width", "600px" )
+                ]
+            ]
+            []
         , div []
             [ h5 [] [ text model.username ]
             ]
-        , div []
-            [ img [ src ("https://github.com/" ++ model.username ++ ".png") ] []
+        , a [ href ("https://github.com/" ++ model.username) ]
+            [ img
+                [ src ("https://github.com/" ++ model.username ++ ".png")
+                , style [ ( "max-width", "200px" ) ]
+                ]
+                []
             ]
         ]
